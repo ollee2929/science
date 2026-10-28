@@ -117,3 +117,12 @@ button:active {
   border-radius: 5px;
   border: 1px solid #dee2e6;
 }
+
+.home-link {
+  display: block;
+  max-width: 850px;
+  margin: 0 auto;
+  color: #3498db;
+  font-size: 14px;
+  text-decoration: none;
+}

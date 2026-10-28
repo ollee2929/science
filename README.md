@@ -1,6 +1,6 @@
 # science
 
-한반도 기후변화 히트맵 시뮬레이터 웹앱입니다. [Vite](https://vite.dev) 기반의 순수 HTML/CSS/JavaScript 프로젝트입니다.
+수업용 과학 시뮬레이터 모음입니다. [Vite](https://vite.dev) 기반의 순수 HTML/CSS/JavaScript 프로젝트입니다.
 
 ## 시작하기
 
@@ -28,17 +28,25 @@ npm run dev      # 개발 서버 실행 → http://localhost:5173
 ## 폴더 구조
 
 ```
-index.html           페이지 HTML (화면 구조)
+index.html               첫 화면 (시뮬레이터 목록)
+climate/index.html       한반도 기후변화 히트맵 시뮬레이터
+homeostasis/index.html   항상성 조절 모식도 시뮬레이터
 src/
-  main.js            화면 동작 (버튼 클릭, 결과 표시)
-  climate.js         계산 로직 (기온 편차, 색상 결정) — 테스트 대상
-  style.css          스타일
+  home.css               첫 화면 스타일
+  climate/               기후변화 앱의 동작(main.js)·계산(climate.js)·스타일
+  homeostasis/           항상성 앱의 동작(main.js)·스타일
 tests/
-  climate.test.js    계산 로직 테스트 (Vitest)
+  climate.test.js        계산 로직 테스트 (Vitest)
 .github/workflows/
-  ci.yml             PR·브랜치 푸시 시 자동 검사
-  deploy.yml         main 브랜치 푸시 시 GitHub Pages 자동 배포
+  ci.yml                 PR·브랜치 푸시 시 자동 검사
+  deploy.yml             main 브랜치 푸시 시 GitHub Pages 자동 배포
 ```
+
+## 새 시뮬레이터 추가하기
+
+1. `새이름/index.html` 페이지와 `src/새이름/` 폴더를 만듭니다.
+2. `vite.config.js`의 `input`에 한 줄 추가합니다.
+3. 첫 화면 `index.html`의 목록에 링크를 추가합니다.
 
 ## 배포 (GitHub Pages)
 

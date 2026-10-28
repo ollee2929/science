@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { COLORS, calcDeviation, formatDeviation, getColorForDeviation } from '../src/climate.js';
+import {
+  COLORS,
+  calcDeviation,
+  formatDeviation,
+  getColorForDeviation,
+} from '../src/climate/climate.js';
 
 describe('calcDeviation', () => {
   it('기준 기온과의 차이를 소수 첫째 자리로 계산한다', () => {
