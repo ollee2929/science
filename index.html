@@ -1,224 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>한반도 기후변화 히트맵 시뮬레이터</title>
-    <style>
-        /* === 1. CSS 스타일 정의 === */
-        body {
-            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 850px;
-            margin: 30px auto;
-            background: #ffffff;
-            padding: 35px;
-            border-radius: 14px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-        }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 12px;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        p {
-            line-height: 1.7;
-            color: #555;
-            font-size: 15px;
-        }
-        .grid-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            font-size: 15px;
-        }
-        .grid-table th, .grid-table td {
-            border: 1px solid #e1e4e6;
-            padding: 14px;
-            text-align: center;
-        }
-        .grid-table th {
-            background-color: #f8f9fa;
-            color: #495057;
-            font-weight: bold;
-        }
-        .grid-table tbody tr:hover {
-            background-color: #fdfdfd;
-        }
-        input[type="number"] {
-            width: 80px;
-            padding: 8px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            text-align: center;
-            font-size: 15px;
-            font-weight: bold;
-        }
-        input[type="number"]:focus {
-            border-color: #80bdff;
-            outline: 0;
-            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-        }
-        .heatmap-box {
-            width: 45px;
-            height: 45px;
-            margin: 0 auto;
-            border-radius: 6px;
-            border: 1px solid #ced4da;
-            transition: all 0.4s ease;
-            box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
-        }
-        .btn-container {
-            text-align: center;
-            margin: 30px 0 20px 0;
-        }
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
-            transition: all 0.2s;
-        }
-        button:hover {
-            background-color: #2980b9;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 8px rgba(52, 152, 219, 0.3);
-        }
-        button:active {
-            transform: translateY(1px);
-        }
-        .legend {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 10px;
-            background: #f8f9fa;
-            padding: 18px;
-            border-radius: 10px;
-            border: 1px solid #e9ecef;
-            margin-top: 25px;
-            font-size: 14px;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .color-indicator {
-            width: 22px;
-            height: 22px;
-            border-radius: 5px;
-            border: 1px solid #dee2e6;
-        }
-    </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="container">
+      <h2>🌡️ 한반도 기후변화 히트맵 시뮬레이터</h2>
+      <p>
+        각 연도 구간별 평년 기온을 입력하고 <b>[히트맵 생성 및 분석]</b> 버튼을 눌러보세요. 30년
+        평년 기준값(14.0°C)과의 편차에 따라 격자의 색상이 자동으로 변하며, 한반도의 기온 변화
+        경향성(빅데이터 패턴)을 한눈에 확인할 수 있습니다.
+      </p>
 
-<div class="container">
-    <h2>🌡️ 한반도 기후변화 히트맵 시뮬레이터</h2>
-    <p>각 연도 구간별 평년 기온을 입력하고 <b>[히트맵 생성 및 분석]</b> 버튼을 눌러보세요. 30년 평년 기준값(14.0°C)과의 편차에 따라 격자의 색상이 자동으로 변하며, 한반도의 기온 변화 경향성(빅데이터 패턴)을 한눈에 확인할 수 있습니다.</p>
-    
-    <table class="grid-table">
+      <table class="grid-table">
         <thead>
-            <tr>
-                <th>연도 구간</th>
-                <th>평균 기온 입력 (°C)</th>
-                <th>계산된 기온 편차 (°C)</th>
-                <th>시각화 히트맵 (패턴)</th>
-            </tr>
+          <tr>
+            <th>연도 구간</th>
+            <th>평균 기온 입력 (°C)</th>
+            <th>계산된 기온 편차 (°C)</th>
+            <th>시각화 히트맵 (패턴)</th>
+          </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><b>1995년</b></td>
-                <td><input type="number" id="temp1" value="13.2" step="0.1"></td>
-                <td id="dev1">-</td>
-                <td><div id="box1" class="heatmap-box"></div></td>
-            </tr>
-            <tr>
-                <td><b>2005년</b></td>
-                <td><input type="number" id="temp2" value="13.9" step="0.1"></td>
-                <td id="dev2">-</td>
-                <td><div id="box2" class="heatmap-box"></div></td>
-            </tr>
-            <tr>
-                <td><b>2015년</b></td>
-                <td><input type="number" id="temp3" value="14.4" step="0.1"></td>
-                <td id="dev3">-</td>
-                <td><div id="box3" class="heatmap-box"></div></td>
-            </tr>
-            <tr>
-                <td><b>2025년</b></td>
-                <td><input type="number" id="temp4" value="15.1" step="0.1"></td>
-                <td id="dev4">-</td>
-                <td><div id="box4" class="heatmap-box"></div></td>
-            </tr>
+          <tr>
+            <td><b>1995년</b></td>
+            <td><input type="number" id="temp1" value="13.2" step="0.1" /></td>
+            <td id="dev1">-</td>
+            <td><div id="box1" class="heatmap-box"></div></td>
+          </tr>
+          <tr>
+            <td><b>2005년</b></td>
+            <td><input type="number" id="temp2" value="13.9" step="0.1" /></td>
+            <td id="dev2">-</td>
+            <td><div id="box2" class="heatmap-box"></div></td>
+          </tr>
+          <tr>
+            <td><b>2015년</b></td>
+            <td><input type="number" id="temp3" value="14.4" step="0.1" /></td>
+            <td id="dev3">-</td>
+            <td><div id="box3" class="heatmap-box"></div></td>
+          </tr>
+          <tr>
+            <td><b>2025년</b></td>
+            <td><input type="number" id="temp4" value="15.1" step="0.1" /></td>
+            <td id="dev4">-</td>
+            <td><div id="box4" class="heatmap-box"></div></td>
+          </tr>
         </tbody>
-    </table>
+      </table>
 
-    <div class="btn-container">
-        <button onclick="calculateClimate()">히트맵 생성 및 분석하기 🚀</button>
+      <div class="btn-container">
+        <button id="calc-btn" type="button">히트맵 생성 및 분석하기 🚀</button>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="color-indicator" style="background-color: #4a90e2"></div>
+          -0.5°C 미만 (한랭 패턴)
+        </div>
+        <div class="legend-item">
+          <div class="color-indicator" style="background-color: #aed8f2"></div>
+          -0.5°C 이상 ~ 0°C 미만
+        </div>
+        <div class="legend-item">
+          <div class="color-indicator" style="background-color: #ffdeaa"></div>
+          0°C 이상 ~ 0.5°C 이하
+        </div>
+        <div class="legend-item">
+          <div class="color-indicator" style="background-color: #d9534f"></div>
+          0.5°C 초과 (온난 패턴)
+        </div>
+      </div>
     </div>
 
-    <div class="legend">
-        <div class="legend-item"><div class="color-indicator" style="background-color: #4a90e2;"></div> -0.5°C 미만 (한랭 패턴)</div>
-        <div class="legend-item"><div class="color-indicator" style="background-color: #aed8f2;"></div> -0.5°C 이상 ~ 0°C 미만</div>
-        <div class="legend-item"><div class="color-indicator" style="background-color: #ffdeaa;"></div> 0°C 이상 ~ 0.5°C 이하</div>
-        <div class="legend-item"><div class="color-indicator" style="background-color: #d9534f;"></div> 0.5°C 초과 (온난 패턴)</div>
-    </div>
-</div>
-
-<script>
-    // === 3. JavaScript 기능 정의 ===
-    function getColorForDeviation(dev) {
-        if (dev < -0.5) return '#4a90e2';         // 파랑 (-0.5°C 미만)
-        if (dev >= -0.5 && dev < 0) return '#aed8f2'; // 연파랑 (-0.5°C ~ 0°C)
-        if (dev >= 0 && dev <= 0.5) return '#ffdeaa'; // 연주황 (0°C ~ 0.5°C)
-        return '#d9534f';                            // 빨강 (0.5°C 초과)
-    }
-
-    function calculateClimate() {
-        const baseTemp = 14.0; // 교과서 활동 기준이 되는 가상의 30년 평균 기온값
-        
-        for (let i = 1; i <= 4; i++) {
-            const tempInput = parseFloat(document.getElementById(`temp${i}`).value);
-            
-            // 유효성 검사 (빈칸 처리)
-            if (isNaN(tempInput)) {
-                alert("모든 연도의 기온 칸에 올바른 숫자를 입력해주세요!");
-                return;
-            }
-            
-            // 기온 편차 계산 (해당 연도 기온 - 기준 기온)
-            const deviation = (tempInput - baseTemp).toFixed(1);
-            
-            // 텍스트 출력 및 스타일 업데이트
-            const devCell = document.getElementById(`dev${i}`);
-            devCell.innerText = deviation > 0 ? `+${deviation} °C` : `${deviation} °C`;
-            devCell.style.fontWeight = "bold";
-            devCell.style.color = deviation > 0 ? "#d9534f" : (deviation < 0 ? "#4a90e2" : "#333");
-            
-            // 편차 수치에 따른 히트맵 박스 색상 연동
-            const box = document.getElementById(`box${i}`);
-            box.style.backgroundColor = getColorForDeviation(parseFloat(deviation));
-        }
-    }
-
-    // 파일이 열릴 때 기본값으로 자동 계산되도록 최초 1회 실행
-    calculateClimate();
-</script>
-</body>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
