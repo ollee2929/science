@@ -1,0 +1,42 @@
+<!doctype html>
+<!--
+  항상성 조절 모식도 시뮬레이터 (모범 자료)
+  생명과학 Ⅱ-03 내분비계와 항상성 유지 · [12생과02-04]
+  혈당량 / 삼투압 / 체온 조절의 음성피드백 루프를 그림과 화살표의 흐름으로 보여 줍니다.
+-->
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>항상성 조절 모식도 시뮬레이터</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="home-link" href="../">← 과학 시뮬레이터 목록</a>
+        <h1>항상성 조절 모식도 시뮬레이터</h1>
+        <p>
+          자극이 들어오면 시상하부가 감지하고 → 신경과 호르몬이 작동하고 → 표적기관이 반응하고 → 그
+          결과가 다시 분비를 억제하는 <b>음성피드백</b>의 흐름을 화살표로 보여 줍니다.
+        </p>
+      </header>
+
+      <nav class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-sys="glu">혈당량 조절</button>
+        <button role="tab" aria-selected="false" data-sys="osm">삼투압 조절</button>
+        <button role="tab" aria-selected="false" data-sys="tmp">체온 조절</button>
+      </nav>
+
+      <section class="panel on" id="pan-glu"></section>
+      <section class="panel" id="pan-osm"></section>
+      <section class="panel" id="pan-tmp"></section>
+
+      <footer>
+        ⚠️ 본 자료는 수업용 교육 모형이며, 의학적 판단·진단의 근거가 아닙니다. · 생명과학 Ⅱ-03
+        내분비계와 항상성 유지
+      </footer>
+    </div>
+
+    <script type="module" src="/src/homeostasis/main.js"></script>
+  </body>
+</html>

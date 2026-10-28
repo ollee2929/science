@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>한반도 기후변화 히트맵 시뮬레이터</title>
+  </head>
+  <body>
+    <a class="home-link" href="../">← 과학 시뮬레이터 목록</a>
+    <div class="container">
+      <h2>🌡️ 한반도 기후변화 히트맵 시뮬레이터</h2>
+      <p>
+        각 연도 구간별 평년 기온을 입력하고 <b>[히트맵 생성 및 분석]</b> 버튼을 눌러보세요. 30년
+        평년 기준값(14.0°C)과의 편차에 따라 격자의 색상이 자동으로 변하며, 한반도의 기온 변화
+        경향성(빅데이터 패턴)을 한눈에 확인할 수 있습니다.
+      </p>
+
+      <table class="grid-table">
+        <thead>
+          <tr>
+            <th>연도 구간</th>
+            <th>평균 기온 입력 (°C)</th>
+            <th>계산된 기온 편차 (°C)</th>
+            <th>시각화 히트맵 (패턴)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>1995년</b></td>
+            <td><input type="number" id="temp1" value="13.2" step="0.1" /></td>
+            <td id="dev1">-</td>
+            <td><div id="box1" class="heatmap-box"></div></td>
+          </tr>
+          <tr>
+            <td><b>2005년</b></td>
+            <td><input type="number" id="temp2" value="13.9" step="0.1" /></td>
+            <td id="dev2">-</td>
+            <td><div id="box2" class="heatmap-box"></div></td>
+          </tr>
+          <tr>
+            <td><b>2015년</b></td>
+            <td><input type="number" id="temp3" value="14.4" step="0.1" /></td>
+            <td id="dev3">-</td>
+            <td><div id="box3" class="heatmap-box"></div></td>
+          </tr>
+          <tr>
+            <td><b>2025년</b></td>
+            <td><input type="number" id="temp4" value="15.1" step="0.1" /></td>
+            <td id="dev4">-</td>
+            <td><div id="box4" class="heatmap-box"></div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="btn-container">
+        <button id="calc-btn" type="button">히트맵 생성 및 분석하기 🚀</button>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="color-indicator" style="background-color: #4a90e2"></div>
+          -0.5°C 미만 (한랭 패턴)
+        </div>
+        <div class="legend-item">
+          <div class="color-indicator" style="background-color: #aed8f2"></div>
+          -0.5°C 이상 ~ 0°C 미만
+        </div>
+        <div class="legend-item">
+          <div class="color-indicator" style="background-color: #ffdeaa"></div>
+          0°C 이상 ~ 0.5°C 이하
+        </div>
+        <div class="legend-item">
+          <div class="color-indicator" style="background-color: #d9534f"></div>
+          0.5°C 초과 (온난 패턴)
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/climate/main.js"></script>
+  </body>
+</html>
